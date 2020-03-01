@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 
+//import css style
+import '../../css/person.css';
 
 //the function person is static and has no options to change something inside
 const personWithoutDynamicContent = ()=> {
@@ -104,7 +106,17 @@ export const ComponentWithHook = () =>
     )
 }
 
-
+//example of external css
+export const PersonWithExternaCSS = (props) =>{
+    return (
+        <div className="Person">
+            <p>I am {props.name}</p>
+            <p>I am {props.age} years old</p>
+            <input type="text" value="Just a textbox"/>
+            
+        </div>
+    )
+}
 
 
 export default personWithDynamicContent;

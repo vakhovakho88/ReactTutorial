@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
+import './../App.css';
 import Person, {PersonWithProps,PersonWithContent,
-    ComponentForStateUpdate, ComponentWithHook} 
+    ComponentForStateUpdate, ComponentWithHook, PersonWithExternaCSS} 
         from './../components/functional/person1'; 
 
 //just first example of class Component
@@ -192,4 +193,33 @@ class SimpleApp10 extends Component
 }
 
 
-export default SimpleApp10;
+// let us use our first styling here
+// external styling
+// inline styling
+class SimpleApp11 extends Component
+{
+    render ()
+    {
+        const styleForTheButton = {
+            backgroundColor: 'White',
+            font: 'inherit',
+            border: '1px solid blue',
+            padding: '8px',
+            cursor: 'pointer'
+        };
+        return (
+            <div>
+            <button style={styleForTheButton}>test button</button>
+            <PersonWithExternaCSS name="name1" age="30"/>
+            <PersonWithExternaCSS name="name1" age="30"/>
+            <PersonWithExternaCSS name="name1" age="35"/>
+            <PersonWithExternaCSS name="name1" age="35"/>
+            <PersonWithExternaCSS name="name1" age="45"/>
+            <PersonWithExternaCSS name="name1" age="35"/>
+            </div>
+        );
+
+    }
+}
+
+export default SimpleApp11;

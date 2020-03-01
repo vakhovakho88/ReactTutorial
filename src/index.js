@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import SimpleApp from './apps/App1';
+import SimpleApp from './apps/App2';
 import registerServiceWorker from './registerServiceWorker';
 
 
