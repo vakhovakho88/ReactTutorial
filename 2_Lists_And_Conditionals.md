@@ -99,4 +99,124 @@ if (this.state.listVisible)
 } 
 
 ```
-* Map goes through all elements and wit return we create new array of transformed elements
+* Map goes through all elements and with return we create new array of transformed elements
+
+
+## Let su make a button that deletes the component from a list
+
+### functional component
+```js
+<div className="Person">
+    {/*another elements*/}
+
+    <button onClick={props.clickEvent}>delete</button>    
+</div>
+```
+### eventhandler in app:
+```js
+export const Person = (props) =>{
+    return (
+        <div className="Person">
+            <p>I am {props.name}</p>
+            <p>I am {props.age} years old</p>
+            <input type="text" value="Just a textbox"/> 
+            <button onClick={props.clickEvent}>delete</button>    
+        </div>
+    )
+}
+```
+
+### app
+```js
+deletePersonHandler = (index) => {
+    const persons = this.state.persons; // direct reference
+    persons.splice(index,1); // remove 1 element from this index
+    this.setState({persons: persons}); // if we dont do it the UI does't refreshes.
+}
+
+// some another code here
+
+let listOfPersons = null;
+if (this.state.isVisible)
+{
+    listOfPersons = (this.state.persons.map((person,index)=>{
+        return <Person name={person.name} age={person.age} clickEvent={()=>this.deletePersonHandler(index)}/>
+    }));   
+}
+```
+* `clickEvent={()=>this.deletePersonHandler(index)`  we are giving an event to component as parameter
+* as we see it, map has two arguments
+
+### Updating state immutably
+```js
+deletePersonHandler = (index) => 
+{
+    //it is direct reference without slice, with splice the object is a copy
+    const persons = this.state.persons.slice();
+
+    //alternative way,spread operator
+    //const persons = [...this.state.persons];
+
+    persons.splice(index,1); // remove 1 element from this index
+    this.setState({persons: persons}); 
+}
+```
+* alternative to   `splice()`  is spread operator `const persons = [...this.state.persons];`
+
+## All lists need KEY prop. 
+### key must be something unique
+
+* Add to State an unique id
+```js
+ {id:"1", name:"Name1", age:38},
+```
+* Add to component `key` prop
+```js
+<Person 
+name={person.name} 
+age={person.age} 
+clickEvent={()=>this.deletePersonHandler(index)}
+key = {person.id}
+/>
+```
+
+## Change name with user input, using KEY prop
+* In our person component:
+```js
+<input type="text" value={props.name} onChange={props.textChange}/> 
+```
+
+* Component Tag:
+```js
+textChange = {(event)=>this.nameChangeHandler(event, person.id)}
+```
+
+* Eventhanler:
+```js
+// id: where to change it
+nameChangeHandler = (event,id)=>{
+    //fits find an index in the array of the person
+    const personIndex = this.state.persons.findIndex(p=>{
+        return p.id===id;
+    });
+
+    // select a person with found id, but copy it with spread operator
+    const foundPerson = {...this.state.persons[personIndex]};
+    // another alternative approach:
+    //const foundPerson = Object.assign({},this.state.persons[personIndex]);
+
+    foundPerson.name = event.target.value;
+    // copy all persons again and update our selected persons name
+    const persons = [...this.state.persons];
+    persons[personIndex] = foundPerson;
+    //replace it in state
+    this.setState({persons: persons});
+}
+```
+* It means, steps to update state on selected index is:
+    * Find index where it is located
+    * Copy element
+    * Update element
+    * Copy whole branch of state
+    * Update element in a copy
+    * Replace a branch in the state with a copy

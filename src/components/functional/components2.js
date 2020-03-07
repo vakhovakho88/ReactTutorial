@@ -6,7 +6,8 @@ export const Person = (props) =>{
         <div className="Person">
             <p>I am {props.name}</p>
             <p>I am {props.age} years old</p>
-            <input type="text" value="Just a textbox"/>     
+            <input type="text" value={props.name} onChange={props.textChange}/> 
+            <button onClick={props.clickEvent}>delete</button>    
         </div>
     )
 }
