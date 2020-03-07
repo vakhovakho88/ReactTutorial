@@ -84,6 +84,7 @@ render ()
 * Same code as above
 * only whit this change
 
+
 ```js
 
 if (this.state.listVisible)
@@ -99,6 +100,7 @@ if (this.state.listVisible)
 } 
 
 ```
+<<<<<<< HEAD
 * Map goes through all elements and with return we create new array of transformed elements
 
 
@@ -220,3 +222,6 @@ nameChangeHandler = (event,id)=>{
     * Copy whole branch of state
     * Update element in a copy
     * Replace a branch in the state with a copy
+=======
+* Map goes through all elements and wit return we create new array of transformed elements
+>>>>>>> 3fb79784ee4d65fbd7bc6faa531150c5f95d2502
