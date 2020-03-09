@@ -100,7 +100,6 @@ if (this.state.listVisible)
 } 
 
 ```
-<<<<<<< HEAD
 * Map goes through all elements and with return we create new array of transformed elements
 
 
@@ -133,7 +132,7 @@ export const Person = (props) =>{
 deletePersonHandler = (index) => {
     const persons = this.state.persons; // direct reference
     persons.splice(index,1); // remove 1 element from this index
-    this.setState({persons: persons}); // if we dont do it the UI does't refreshes.
+    this.setState({persons: persons}); // if we dont do it the UI does't refresh.
 }
 
 // some another code here
@@ -147,13 +146,13 @@ if (this.state.isVisible)
 }
 ```
 * `clickEvent={()=>this.deletePersonHandler(index)`  we are giving an event to component as parameter
-* as we see it, map has two arguments
+* as we see it, map has two arguments: element of the list and index of the element (0 based)
 
 ### Updating state immutably
 ```js
 deletePersonHandler = (index) => 
 {
-    //it is direct reference without slice, with splice the object is a copy
+    //it is direct reference without slice, with slice the object is a copy
     const persons = this.state.persons.slice();
 
     //alternative way,spread operator
@@ -163,7 +162,7 @@ deletePersonHandler = (index) =>
     this.setState({persons: persons}); 
 }
 ```
-* alternative to   `splice()`  is spread operator `const persons = [...this.state.persons];`
+* alternative to   `slice()`  is spread operator `const persons = [...this.state.persons];`
 
 ## All lists need KEY prop. 
 ### key must be something unique
@@ -222,6 +221,5 @@ nameChangeHandler = (event,id)=>{
     * Copy whole branch of state
     * Update element in a copy
     * Replace a branch in the state with a copy
-=======
+
 * Map goes through all elements and wit return we create new array of transformed elements
->>>>>>> 3fb79784ee4d65fbd7bc6faa531150c5f95d2502

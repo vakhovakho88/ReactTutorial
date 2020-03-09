@@ -153,7 +153,7 @@ class SimpleApp4 extends Component{
     }
     deletePersonHandler = (index) => 
     {
-        //it is direct reference without splice, with splice the object is a copy
+        //it is direct reference without slice, with slice the object is a copy
         const persons = this.state.persons.slice();
         //alternative way,spread operator
         //const persons = [...this.state.persons];
