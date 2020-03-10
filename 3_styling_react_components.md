@@ -91,3 +91,122 @@ const style = {
 * In this case in our example:
     * If the list is visible: hover => backgroundColor:'lightgreen'
     * If the lits is invisible:  hover => backgroundColor:'white'
+
+## Using Radium to have media queries
+
+* To use Media Queries with redium we have to load `StyleRoot` component from radium class in our root component
+* Then we have to insert our whole return tags in this Styleroot component
+```js
+import Radium,{StyleRoot} from 'radium';
+//...
+
+ return (
+    <StyleRoot>
+        <div>
+            something to return
+        </div>
+    </StyleRoot>
+);
+
+```
+
+* Our media query in functional component
+```js
+
+const Person = (props) =>{
+
+    //media query
+    const style = {
+        '@media (min-width: 500px)': {
+            width:'450px'
+        }
+    };
+
+    return (
+        <div className="Person" style={style} >
+        </div>
+    )
+}
+
+```
+* As we see it is enough to assign just a whole object, without the key of inner object.
+* U can have more objects inside it too.
+* Till it is bigger then 500px the width of the div is fixed 450px.
+
+## Styled components
+* this is a library and we must install it `npm install --save styled-components`
+* To use it we must remove all Radium keywords and export convertings, since it is css world
+* The website is: `https://styled-components.com/`
+* Import styled component:
+```js
+import styled from 'styled-components';
+```
+
+* Usage:
+```js
+
+//it returns self a component
+const SytledDiv = styled.div`
+    width: 60%;
+    margin: 10px auto;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 3px #ccc;
+    padding: 16px;
+    text-align: center;
+
+    @media (min-width: 500px) {
+        width:450px;
+    }
+`;
+
+
+const Person = (props)=>{
+    return (
+        <SytledDiv>
+            <p>I am {props.name}</p>
+            <p>I am {props.age} years old</p>
+            <input type="text" value={props.name} onChange={props.textChange}/> 
+            <button onClick={props.clickEvent}>delete</button>    
+        </SytledDiv>
+    )
+
+```
+* All html tags can be used so. Example:
+    * styled.div``
+    * styled.button``
+    * ...
+* Styled components generate css in head and assigns temprorary class-names to components.
+* To have pseudo selectors inside Styled components we have to use: `&:`
+```js
+&:hover {
+    background-color: lightgreen; 
+    color: black;
+}
+```
+* This components can be just normally changed from javascript and all features of tags can be used.
+* We can have styled components in separate files or we can create global file with styled components.
+
+## Styled components and dynamic styles
+
+* Decision making in styled component, as it is just javascript
+```js
+
+const StyledButton2 = styled.button`
+    background-color: ${props=> props.isVisible ? 'red' : 'green'};
+    font: inherit;
+    border: 1px solid blue;
+
+    &:hover {
+        background-color: ${props=> props.isVisible ? 'salmon' : 'lightgreen'}; 
+
+    }
+`;
+
+// ${props=> props.isVisible ? 'red' : 'green'}
+// ${props=> props.isVisible ? 'salmon' : 'lightgreen'}
+
+```
+* As we see it we can give to styled component just normal props
+```js
+<StyledButton2 isVisible={this.state.isVisible}>toggle the list</StyledButton2>
+```
