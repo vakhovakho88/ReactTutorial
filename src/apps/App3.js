@@ -4,6 +4,9 @@ import Radium,{StyleRoot} from 'radium';
 import styled from 'styled-components';
 import './../App.css';
 
+import ComponentForCSSModules from './../components/functional/components3';
+
+
 
 // 1.change style object dynamically
 // 2. change classname dynamically
@@ -313,5 +316,22 @@ class SimpleApp3 extends Component{
 
 
 
+// CSS Modules usage
+class SimpleApp4 extends Component{
 
-export default SimpleApp3;
+    render(){
+
+        return(
+            <div>
+                <ComponentForCSSModules />
+                <ComponentForCSSModules/>
+                <ComponentForCSSModules/>
+            </div>
+        );
+    }
+}
+
+
+
+
+export default SimpleApp4;

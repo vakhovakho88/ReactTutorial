@@ -2,6 +2,10 @@ import React, {useState} from 'react';
 import Radium from 'radium';
 import styled from 'styled-components';
 import '../../css/person.css';
+
+//css modules
+import moduleClasses from '../../css/modules.css';
+
 //component person
 const PersonWithRadium = (props) =>{
 
@@ -53,7 +57,20 @@ const Person = (props)=>{
 
 }
 
-export default Person;
+
+const ComponentForCSSModules = ()=>{
+    return(
+        <div className={moduleClasses.innerContainer}>
+            <input type="text" className={moduleClasses.text}/>
+            <button className={moduleClasses.button}> click me</button>
+            {/*button with two classes*/}
+            <button className={moduleClasses.button+" "+moduleClasses.secondButtonStyle}> click me</button>
+        </div>
+    );
+}
+
+
+export default ComponentForCSSModules;
 
 
 

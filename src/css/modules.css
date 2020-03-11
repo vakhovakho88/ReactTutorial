@@ -1,0 +1,24 @@
+.button {
+    width:200px;
+    height: 50px;
+}
+.button.secondButtonStyle{
+    background-color: blue;
+}
+
+.text {
+    width:200px;
+    height: 50px;
+}
+.text:hover{
+    background-color: blue;
+}
+
+.container{
+    padding: 3px;
+    border: 2px solid red;
+}
+
+.innerContainer{
+    margin-bottom: 2px;
+}

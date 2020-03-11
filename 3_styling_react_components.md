@@ -210,3 +210,97 @@ const StyledButton2 = styled.button`
 ```js
 <StyledButton2 isVisible={this.state.isVisible}>toggle the list</StyledButton2>
 ```
+
+
+## CSS Modules
+* It is relatively new concept 
+* With CSS modules u can write a CSS code and make Sure, that it only applies a given component.
+* The magic behind is, that it automatically generates unique classNames.
+* When we import it it assigns to our chosen components this unique class names and whole styling behind them.
+
+### Configure CSS Modules
+* If we are using `react-scripts`<2.0 than we need to:
+    * run: `npm run eject`
+    * Then go to: `config\webpack.config.dev.js`
+    * And find this scope:
+    ```json
+     test: /\.css$/,
+            use: [
+              require.resolve('style-loader'),
+              {
+                loader: require.resolve('css-loader'),
+                options: {
+                  importLoaders: 1,
+                  modules: true,
+                  localIndentName: '[name]__[local]__[hash:base64:5]'
+                },
+              },
+    ```
+    * The Last two items are added now....
+    * Add this two items in `config\webpack.config.prod.js` too.
+    ```json
+            use: [
+                {
+                    loader: require.resolve('css-loader'),
+                    options: {
+                    importLoaders: 1,
+                    minimize: true,
+                    sourceMap: shouldUseSourceMap,
+                    modules: true,
+                    localIndentName: '[name]__[local]__[hash:base64:5]'
+                    },
+                },
+    ```
+    * Thats it
+* If u use later versions of react script as 2.x than u only need to change name of CSS file to: `filename.module.css` 
+
+
+### Using css modules
+* Import 
+    ```js
+
+    //css modules
+    import moduleClasses from '../../css/modules.css';
+
+    ```
+* Little part from css file
+```css
+
+.button {
+    width:200px;
+    height: 50px;
+}
+.button.secondButtonStyle{
+    background-color: blue;
+}
+
+.text {
+    width:200px;
+    height: 50px;
+}
+.text:hover{
+    background-color: blue;
+}
+
+```
+
+* Assign it to component
+    ```js
+        const ComponentForCSSModules = ()=>{
+            return(
+                <div className={moduleClasses.innerContainer}>
+                    <input type="text" className={moduleClasses.text}/>
+                    <button className={moduleClasses.button}> click me</button>
+
+                    {/*button with two classes*/}
+                    <button className={moduleClasses.button+" "+moduleClasses.secondButtonStyle}> click me</button>
+                </div>
+        );
+}   
+    ```
+
+* As we mentioned in this case a total unique className will be generated
+* If we try just to access CSS styling with the naming from file it shouldnot work.
+* It means every generated CSS className cannot be used in another component accidentally
+* By the way, if you somehow also want to define a global (i.e. un-transformed) CSS class in such a .css  file, you can prefix the selector with `:global`. Example: `:global .Post { ... }`
+* Then u can use it just normall
