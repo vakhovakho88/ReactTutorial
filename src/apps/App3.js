@@ -3,6 +3,7 @@ import Person from '../components/functional/components3';
 import Radium,{StyleRoot} from 'radium';
 import styled from 'styled-components';
 import './../App.css';
+import ErrorBoundary from './../ErrorBoundary/ErrorBoundary';
 
 import ComponentForCSSModules from './../components/functional/components3';
 
@@ -322,16 +323,13 @@ class SimpleApp4 extends Component{
     render(){
 
         return(
-            <div>
-                <ComponentForCSSModules />
-                <ComponentForCSSModules/>
-                <ComponentForCSSModules/>
-            </div>
+                <div>
+                    <ComponentForCSSModules />
+                    <ComponentForCSSModules/>
+                    <ComponentForCSSModules/>
+                </div>
         );
     }
 }
-
-
-
 
 export default SimpleApp4;

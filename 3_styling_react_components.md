@@ -304,3 +304,61 @@ const StyledButton2 = styled.button`
 * It means every generated CSS className cannot be used in another component accidentally
 * By the way, if you somehow also want to define a global (i.e. un-transformed) CSS class in such a .css  file, you can prefix the selector with `:global`. Example: `:global .Post { ... }`
 * Then u can use it just normall
+
+
+# Debugging and Error
+* U can Debug code with chrome developer tools -> resources...
+* Or alternatively: React developer tools
+* U can check every components there can see values of props and can change the values too
+* If u change values UI changes too
+
+## Error Boundary
+* Just a class that we are creating
+```js
+
+import React, {Component} from 'react';
+
+class ErrorBoundary extends Component{
+
+    state = {
+        hasErrors:false,
+        errorMessage: ''
+    }
+
+    //this is a function from standard function from library that catches an error
+    componentDidCatch=(error, info)=>{
+        this.setState({hasErrors:true, info:error})
+    }
+    render(){
+      if (this.state.hasErrors){
+          return <h1>{this.state.errorMessage}</h1>
+      }
+      else
+      {
+          return this.props.children;
+      }
+    }
+}
+export default ErrorBoundary;
+
+```
+
+* `componentDidCatch` this function would be called automatically and this is a key
+* We just wrap whole output inside this component tags. 
+    * If there does not occur any error then: `this.props.children;` outputs the normal output
+    * In another case only error message.
+* This means if user receives any error, he cannot see rests of component, he sees only the error message
+* Let us mention, this is class cmponent and as we see it a `class component has props too`. Without any extra props parameter.
+
+## Very important: in Developer mode the error handling from ErrorBoundary is not active. It only appears in Production.
+
+### Just another example how to throw an error, but without boundary the user sees tags too.
+```js
+
+const rnd = Math.random();
+if (rnd<0.7)
+{
+    throw new Error("Something went rong");
+}
+
+```
